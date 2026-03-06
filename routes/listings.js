@@ -22,7 +22,45 @@ router
     upload.single('listing[image]'),
     wrapAsync(listingController.createlisting)
     );
-    
+  // SEARCH ROUTE
+router.get("/search", async (req, res) => {
+
+    let { q } = req.query;
+
+    if(!q || q.trim() === ""){
+        req.flash("error","Please enter something to search");
+        return res.redirect("/listings");
+    }
+
+    const listings = await Listing.find({
+        title: { $regex: q, $options: "i" }
+    });
+
+    if(listings.length === 0){
+        req.flash("error","No listings found for your search");
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/index.ejs",{ allListings: listings });
+
+});
+
+router.get("/suggestions", async (req, res) => {
+
+    let { q } = req.query;
+
+    if(!q){
+        return res.json([]);
+    }
+
+    const listings = await Listing.find({
+        title: { $regex: q, $options: "i" }
+    }).limit(5);
+
+    res.json(listings);
+
+});
+  
 
 //New Route
 router.get("/new", isLoggedIn, listingController.renderNewlistingForm);
