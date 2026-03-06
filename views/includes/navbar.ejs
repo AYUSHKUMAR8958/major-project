@@ -26,60 +26,53 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
 
+    <!-- Logo -->
     <a class="navbar-brand" href="/listings">
       <i class="fa-solid fa-compass"></i>
     </a>
 
-    <button class="navbar-toggler" type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+    <!-- Toggle Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse" id="navbarNav">
 
-      <!-- Left -->
-      <ul class="navbar-nav">
+      <!-- LEFT -->
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link" href="/listings">Explore</a>
         </li>
       </ul>
 
-      <!-- Search -->
-      <form class="d-flex ms-auto me-3" role="search">
-        <input class="form-control me-2 search-inp"
-          type="search"
-          placeholder="Search Destination">
-        <button class="btn btn-search" type="submit">
-          <i class="fa-solid fa-magnifying-glass"></i> Search
-        </button>
+      <!-- CENTER SEARCH -->
+      <form class="d-flex mx-auto" role="search" action="/listings" method="GET">
+        <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search Destination">
+       <button class="btn btn-search d-flex align-items-center" type="submit">
+  <i class="fa-solid fa-magnifying-glass me-2"></i> Search
+</button>
       </form>
 
-      <!-- Right -->
-      <ul class="navbar-nav">
-
+      <!-- RIGHT -->
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" href="/listings/new">Airbnb your home</a>
         </li>
 
         <% if(!currUser){ %>
-        <li class="nav-item">
-          <a class="nav-link" href="/signup">SignUp</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">SignUp</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
         <% } %>
 
         <% if(currUser){ %>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
         <% } %>
-
       </ul>
 
     </div>
